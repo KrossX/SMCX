@@ -19,10 +19,11 @@
 #include "Machine.h"
 #include "Dialog.h"
 #include "Renderer.h"
+#include "Renderer_OGL.h"
 
 HINSTANCE hInst = NULL;
-Machine * machine = NULL;
-Render * render = NULL;
+MACHINE * machine = NULL;
+RENDERER * render = NULL;
 
 bool romloaded = false;
 bool stopped = true;
@@ -41,13 +42,16 @@ int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 
 	SetProcessAffinityMask(GetCurrentProcess(), 1);
 
-	if(!InitDialog(hInst, nCmdShow, hWnd)) return Shutdown();
-	
-	render = new Render();
-	if(!render || render->Init(hWnd) != S_OK) return Shutdown();
+	render = new RENDERER_OGL();
+	machine = new MACHINE();
 
-	machine = new Machine();
-	if(!machine) return Shutdown();
+	if (!render ||
+		!machine ||
+		!InitDialog(hInst, nCmdShow, hWnd) ||
+		render->Init(hWnd) != S_OK)
+	{
+		return Shutdown();
+	}
 
 	machine->Start();
 

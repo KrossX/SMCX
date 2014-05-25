@@ -30,8 +30,8 @@
 wchar_t windowTitle[] = L"SuperMegaChip-X";
 wchar_t windowClass[] = L"SUPERMEGACHIPX";
 
-extern Machine * machine;
-extern Render * render;
+extern MACHINE * machine;
+extern RENDERER * render;
 
 extern HINSTANCE hInst;
 extern bool romloaded;
@@ -43,7 +43,6 @@ void MenuRunSet(HWND hWnd, bool enable)
 {
 	HMENU menu = GetMenu(hWnd);
 	EnableMenuItem(menu, ID_RUN_START, enable ? MF_ENABLED : MF_GRAYED);
-	EnableMenuItem(menu, ID_RUN_STOP, enable ? MF_ENABLED : MF_GRAYED);
 	EnableMenuItem(menu, ID_RUN_RESET, enable ? MF_ENABLED : MF_GRAYED);
 }
 

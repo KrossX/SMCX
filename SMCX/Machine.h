@@ -62,7 +62,7 @@ T Wrap(T value, T min, T max)
 };
 
 
-class Machine
+class MACHINE
 {
 	u8 Memory[0x2000000 /*0x1000*/]; // 4 KB of Memory, MEGA 32 MB?
 	u8 Display[256][192]; // Black and White display Chip 8 (64x32) SCHIP (128x64)
@@ -74,7 +74,7 @@ class Machine
 	u8 Input[16]; // 16 keys... 0-9, A-F
 	u16 Stack[16]; // Stack, 16 levels of nesting
 
-	typedef void (Machine::* pFunc)();
+	typedef void (MACHINE::* pFunc)();
 	pFunc I0X00[16];
 	pFunc IX000[16];
 	pFunc I800X[16];
@@ -143,5 +143,5 @@ public:
 	void Loop();
 	void Shutdown();
 
-	Machine();
+	MACHINE();
 };

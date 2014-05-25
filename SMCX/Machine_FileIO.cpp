@@ -56,7 +56,7 @@ u16 Font10[] =
 			 0x80F0, 0x8080, 0x80F0, 0x8080, 0x0080};// F
 
 
-bool Machine::LoadROM(const wchar_t * name)
+bool MACHINE::LoadROM(const wchar_t * name)
 {
 	memset(Memory, 0, sizeof(Memory));
 	memcpy(Memory, Font, sizeof(Font));

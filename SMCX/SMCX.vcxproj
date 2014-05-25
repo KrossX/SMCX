@@ -97,7 +97,8 @@
     <ClCompile Include="Machine_Input.cpp" />
     <ClCompile Include="Machine_Render.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Renderer_D3D11.cpp" />
+    <ClCompile Include="Renderer_OGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debugger.h" />
@@ -106,6 +107,8 @@
     <ClInclude Include="Machine_Instructions.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Renderer_D3D11.h" />
+    <ClInclude Include="Renderer_OGL.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

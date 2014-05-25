@@ -21,7 +21,7 @@
 
 u8 Keyboard[256] = {0};
 
-void Machine::UpdateInput(u8 key, u8 state)
+void MACHINE::UpdateInput(u8 key, u8 state)
 {
 	//Sleep(1);
 

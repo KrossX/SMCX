@@ -16,16 +16,20 @@
  */
 
 #include "Main.h"
-#include "Renderer.h"
 
+#ifdef _USED3D11
 #include <cstdio>
 
+#include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dx11.lib")
 #pragma comment(lib, "d3dx10.lib")
+
+#include "Renderer.h"
+
 
 struct VERTEX
 {
@@ -486,3 +490,4 @@ void Render::Restart(HWND hWnd)
 	Shutdown();
 	Init(hWnd);
 }
+#endif

@@ -19,9 +19,9 @@
 #include "Machine.h"
 #include "Renderer.h"
 
-extern Render *render;
+extern RENDERER *render;
 
-void Machine::SetPixel(u16 x, u16 y, u8 pix)
+void MACHINE::SetPixel(u16 x, u16 y, u8 pix)
 {
 	if(Mode_Mega)
 		render->SetPixel(x, y, pix);
@@ -36,25 +36,25 @@ void Machine::SetPixel(u16 x, u16 y, u8 pix)
 	}
 }
 
-void Machine::RenderSprite()
+void MACHINE::RenderSprite()
 {
 	bool msmooth = Mode_Mega && Mega_Smooth;
 
 	if(!msmooth)
-		render->RenderFrame(vsync);
+		render->RenderFrame();
 }
 
-void Machine::RenderClear()
+void MACHINE::RenderClear()
 {
 	bool msmooth = Mode_Mega && Mega_Smooth;
 
 	if(msmooth)
-		render->RenderFrame(2);
+		render->RenderFrame();
 
 	render->RenderClear(!Mode_Mega);
 }
 
-void Machine::LoadPalette()
+void MACHINE::LoadPalette()
 {
 	//ARGB to d3d BGRA
 
