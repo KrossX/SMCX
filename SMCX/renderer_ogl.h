@@ -1,3 +1,7 @@
+/* Copyright (c) 2012 KrossX <krossx@live.com>
+ * License: http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
+
 #ifndef RENDERER_OGL_H
 #define RENDERER_OGL_H
 
