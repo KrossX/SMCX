@@ -16,76 +16,76 @@
 */
 
 
-#include "Main.h"
-#include "Machine.h"
+#include "main.h"
+#include "machine.h"
 #include <ctime>
-#include "Renderer.h"
+#include "renderer.h"
 
-MACHINE::MACHINE()
+Machine::Machine()
 {
-	IX000[0x0] = &MACHINE::_0XXX;
-	IX000[0x1] = &MACHINE::_1XXX;
-	IX000[0x2] = &MACHINE::_2NNN;
-	IX000[0x3] = &MACHINE::_3XNN;
-	IX000[0x4] = &MACHINE::_4XNN;
-	IX000[0x5] = &MACHINE::_5XY0;
-	IX000[0x6] = &MACHINE::_6XNN;
-	IX000[0x7] = &MACHINE::_7XNN;
-	IX000[0x8] = &MACHINE::_8XXX;
-	IX000[0x9] = &MACHINE::_9XY0;
-	IX000[0xA] = &MACHINE::_ANNN;
-	IX000[0xB] = &MACHINE::_BNNN;
-	IX000[0xC] = &MACHINE::_CXNN;
-	IX000[0xD] = &MACHINE::_DRAW;
-	IX000[0xE] = &MACHINE::_EXXX;
-	IX000[0xF] = &MACHINE::_FXXX;
+	IX000[0x0] = &Machine::_0XXX;
+	IX000[0x1] = &Machine::_1XXX;
+	IX000[0x2] = &Machine::_2NNN;
+	IX000[0x3] = &Machine::_3XNN;
+	IX000[0x4] = &Machine::_4XNN;
+	IX000[0x5] = &Machine::_5XY0;
+	IX000[0x6] = &Machine::_6XNN;
+	IX000[0x7] = &Machine::_7XNN;
+	IX000[0x8] = &Machine::_8XXX;
+	IX000[0x9] = &Machine::_9XY0;
+	IX000[0xA] = &Machine::_ANNN;
+	IX000[0xB] = &Machine::_BNNN;
+	IX000[0xC] = &Machine::_CXNN;
+	IX000[0xD] = &Machine::_DRAW;
+	IX000[0xE] = &Machine::_EXXX;
+	IX000[0xF] = &Machine::_FXXX;
 
 	for (int i = 0; i < 16; i++)
 	{
-		I0X00[i] = &MACHINE::_0NNN;
-		I800X[i] = &MACHINE::_NULL;
+		I0X00[i] = &Machine::_0NNN;
+		I800X[i] = &Machine::_NULL;
 	}
 
 	for (int i = 0; i < 256; i++)
 	{
-		IF0XX[i] = &MACHINE::_NULL;
+		IF0XX[i] = &Machine::_NULL;
 	}
 
-	I0X00[0x0] = &MACHINE::_00XX;
-	I0X00[0x1] = &MACHINE::_M01NN;
-	I0X00[0x2] = &MACHINE::_M02NN;
-	I0X00[0x3] = &MACHINE::_M03NN;
-	I0X00[0x4] = &MACHINE::_M04NN;
-	I0X00[0x5] = &MACHINE::_M05NN;
-	I0X00[0x6] = &MACHINE::_M060N;
-	I0X00[0x7] = &MACHINE::_M0700;
-	I0X00[0x8] = &MACHINE::_M080N;
+	I0X00[0x0] = &Machine::_00XX;
+	I0X00[0x1] = &Machine::_M01NN;
+	I0X00[0x2] = &Machine::_M02NN;
+	I0X00[0x3] = &Machine::_M03NN;
+	I0X00[0x4] = &Machine::_M04NN;
+	I0X00[0x5] = &Machine::_M05NN;
+	I0X00[0x6] = &Machine::_M060N;
+	I0X00[0x7] = &Machine::_M0700;
+	I0X00[0x8] = &Machine::_M080N;
 
-	I800X[0x0] = &MACHINE::_8XY0;
-	I800X[0x1] = &MACHINE::_8XY1;
-	I800X[0x2] = &MACHINE::_8XY2;
-	I800X[0x3] = &MACHINE::_8XY3;
-	I800X[0x4] = &MACHINE::_8XY4;
-	I800X[0x5] = &MACHINE::_8XY5;
-	I800X[0x6] = &MACHINE::_8XY6;
-	I800X[0x7] = &MACHINE::_8XY7;
-	I800X[0xE] = &MACHINE::_8XYE;
+	I800X[0x0] = &Machine::_8XY0;
+	I800X[0x1] = &Machine::_8XY1;
+	I800X[0x2] = &Machine::_8XY2;
+	I800X[0x3] = &Machine::_8XY3;
+	I800X[0x4] = &Machine::_8XY4;
+	I800X[0x5] = &Machine::_8XY5;
+	I800X[0x6] = &Machine::_8XY6;
+	I800X[0x7] = &Machine::_8XY7;
+	I800X[0xE] = &Machine::_8XYE;
 
-	IF0XX[0x07] = &MACHINE::_FX07;
-	IF0XX[0x0A] = &MACHINE::_FX0A;
-	IF0XX[0x15] = &MACHINE::_FX15;
-	IF0XX[0x18] = &MACHINE::_FX18;
-	IF0XX[0x1E] = &MACHINE::_FX1E;
-	IF0XX[0x29] = &MACHINE::_FX29;
-	IF0XX[0x30] = &MACHINE::_SFX30;
-	IF0XX[0x33] = &MACHINE::_FX33;
-	IF0XX[0x55] = &MACHINE::_FX55;
-	IF0XX[0x65] = &MACHINE::_FX65;
-	IF0XX[0x75] = &MACHINE::_SFX75;
-	IF0XX[0x85] = &MACHINE::_SFX85;
+	IF0XX[0x07] = &Machine::_FX07;
+	IF0XX[0x0A] = &Machine::_FX0A;
+	IF0XX[0x15] = &Machine::_FX15;
+	IF0XX[0x18] = &Machine::_FX18;
+	IF0XX[0x1E] = &Machine::_FX1E;
+	IF0XX[0x29] = &Machine::_FX29;
+	IF0XX[0x30] = &Machine::_SFX30;
+	IF0XX[0x33] = &Machine::_FX33;
+	IF0XX[0x55] = &Machine::_FX55;
+	IF0XX[0x65] = &Machine::_FX65;
+	IF0XX[0x75] = &Machine::_SFX75;
+	IF0XX[0x85] = &Machine::_SFX85;
 }
 
-u8 MACHINE::GetMode()
+u8 Machine::get_mode()
 {
 	if (Mode_Mega)
 		return CMODE_MEGA;
@@ -97,9 +97,9 @@ u8 MACHINE::GetMode()
 		return CMODE_CHIP8;
 }
 
-void MACHINE::UpdateRect()
+void Machine::update_rect()
 {
-	switch (GetMode())
+	switch (get_mode())
 	{
 	case CMODE_CHIP8:
 		ScaleX = 4;
@@ -123,7 +123,7 @@ void MACHINE::UpdateRect()
 	}
 }
 
-void MACHINE::Reset()
+void Machine::reset()
 {
 	memset(Display, 0, sizeof(Display));
 	memset(V, 0, sizeof(V));
@@ -142,27 +142,27 @@ void MACHINE::Reset()
 	Mode_Mega = false;
 	Mode_SChip = false;
 	Mode_Chip8H = false;
-	UpdateRect();
+	update_rect();
 
 	srand((int)time(NULL));
-	RenderClear();
-	RenderSprite();
+	render_clear();
+	render_sprite();
 }
 
 
 
-void MACHINE::Loop()
+void Machine::loop()
 {
 	DebugLineIn(V, HP48, PC, I);
 
 	QueryPerformanceCounter(&tNew);
 	tDiff = tNew.QuadPart - tOld.QuadPart;
 
-	bool msmooth = Mode_Mega && Mega_Smooth;
+	bool msmooth = Mode_Mega && mega_smooth;
 
 	if (msmooth || !tFreq || tDiff > tFreq)
 	{
-		GetOpcode();
+		get_opcode();
 		(this->*IX000[opcode.C])();
 		tOld = tNew;
 	}
@@ -171,7 +171,7 @@ void MACHINE::Loop()
 
 	if (!msmooth && (!rFreq || tDiff > rFreq))
 	{
-		RenderSprite();
+		render_sprite();
 		rOld = tNew;
 	}
 }
@@ -181,7 +181,7 @@ struct _timers
 	u8 *DT, *ST;
 } timers;
 
-extern RENDERER * render;
+extern Renderer * render;
 
 void CountdownThread()
 {
@@ -197,7 +197,7 @@ void CountdownThread()
 	};
 }
 
-void MACHINE::Start()
+void Machine::start()
 {
 	DebuggerStart();
 	ProfilerStart();
@@ -212,16 +212,16 @@ void MACHINE::Start()
 
 	rOld = tOld;
 
-	SetCPUfreq(600);
-	SetGPUfreq(60);
+	set_cpu_freq(600);
+	set_gpu_freq(60);
 
-	Mega_Smooth = true;
+	mega_smooth = true;
 	vsync = 0;
 
-	Reset();
+	reset();
 }
 
-void MACHINE::Shutdown()
+void Machine::shutdown()
 {
 	DebuggerStop();
 	ProfilerStop();
@@ -229,15 +229,15 @@ void MACHINE::Shutdown()
 	if (hThread) TerminateThread(hThread, 0);
 }
 
-void MACHINE::SetCPUfreq(u32 freq)
+void Machine::set_cpu_freq(u32 freq)
 {
-	cpuFreq = freq;
-	tFreq = cpuFreq ? _Freq.QuadPart / cpuFreq : 0;
+	cpu_freq = freq;
+	tFreq = cpu_freq ? _Freq.QuadPart / cpu_freq : 0;
 }
 
-void MACHINE::SetGPUfreq(u32 freq)
+void Machine::set_gpu_freq(u32 freq)
 {
-	gpuFreq = freq;
-	rFreq = gpuFreq ? _Freq.QuadPart / gpuFreq : 0;
+	gpu_freq = freq;
+	rFreq = gpu_freq ? _Freq.QuadPart / gpu_freq : 0;
 }
 

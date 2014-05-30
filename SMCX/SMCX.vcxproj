@@ -90,29 +90,29 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Debugger.cpp" />
-    <ClCompile Include="Dialog_Main.cpp" />
-    <ClCompile Include="Machine.cpp" />
-    <ClCompile Include="Machine_FileIO.cpp" />
-    <ClCompile Include="Machine_Input.cpp" />
-    <ClCompile Include="Machine_Render.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Renderer_D3D11.cpp" />
-    <ClCompile Include="Renderer_OGL.cpp" />
+    <ClCompile Include="debugger.cpp" />
+    <ClCompile Include="dialog_main.cpp" />
+    <ClCompile Include="machine.cpp" />
+    <ClCompile Include="machine_fileio.cpp" />
+    <ClCompile Include="machine_input.cpp" />
+    <ClCompile Include="machine_render.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="renderer_d3d11.cpp" />
+    <ClCompile Include="renderer_ogl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Debugger.h" />
-    <ClInclude Include="Dialog.h" />
-    <ClInclude Include="Machine.h" />
-    <ClInclude Include="Machine_Instructions.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Renderer_D3D11.h" />
-    <ClInclude Include="Renderer_OGL.h" />
+    <ClInclude Include="debugger.h" />
+    <ClInclude Include="dialog.h" />
+    <ClInclude Include="machine.h" />
+    <ClInclude Include="machine_instructions.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="renderer.h" />
+    <ClInclude Include="renderer_d3d11.h" />
+    <ClInclude Include="renderer_ogl.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Machine_Instructions.cpp">
+    <ClCompile Include="machine_instructions.cpp">
       <FileType>Document</FileType>
     </ClCompile>
     <None Include="shaders.fx" />

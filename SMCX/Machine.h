@@ -17,7 +17,7 @@
 
 
 #pragma once
-#include "Debugger.h"
+#include "debugger.h"
 
 union OP // Opcode
 {
@@ -47,22 +47,22 @@ enum
 };
 
 template<class T>
-T Clamp(T value, T min, T max)
+T clamp(T value, T min, T max)
 {
 	return value > max? max : value < min? min : value;
 };
 
 template<class T>
-T Wrap(T value, T min, T max)
+T wrap(T value, T min, T max)
 {
-	if(value > max) Wrap(value - max +min, min, max);
-	if(value < min) Wrap(value + max -min, min, max);
+	if(value > max) wrap(value - max +min, min, max);
+	if(value < min) wrap(value + max -min, min, max);
 
 	return value;
 };
 
 
-class MACHINE
+class Machine
 {
 	u8 Memory[0x2000000 /*0x1000*/]; // 4 KB of Memory, MEGA 32 MB?
 	u8 Display[256][192]; // Black and White display Chip 8 (64x32) SCHIP (128x64)
@@ -74,7 +74,7 @@ class MACHINE
 	u8 Input[16]; // 16 keys... 0-9, A-F
 	u16 Stack[16]; // Stack, 16 levels of nesting
 
-	typedef void (MACHINE::* pFunc)();
+	typedef void (Machine::* pFunc)();
 	pFunc I0X00[16];
 	pFunc IX000[16];
 	pFunc I800X[16];
@@ -104,44 +104,41 @@ class MACHINE
 	// Timer stuff...
 	LARGE_INTEGER tOld, tNew, rOld, _Freq;
 	LONGLONG tDiff, tFreq, rFreq;
-	
 
+#include "machine_instructions.h"
 
-
-#include "Machine_Instructions.h"
-
-	void GetOpcode() 
+	void get_opcode() 
 	{ 
 		opcode.CC = Memory[PC++];
 		opcode.NN = Memory[PC++];
 	}
 
-	u8 GetMode();
-	void UpdateRect();
+	u8 get_mode();
+	void update_rect();
 
-	u16 GetRandom();
+	u16 get_random();
 
-	void SetPixel(u16 x, u16 y, u8 pix);
-	void RenderClear();
-	void RenderSprite();
-	void LoadPalette();
+	void set_pixel(u16 x, u16 y, u8 pix);
+	void render_clear();
+	void render_sprite();
+	void load_palette();
 
 public:
 	
 	// Dialog stuff...
-	bool Mega_Smooth;
+	bool mega_smooth;
 	u8 vsync; 
-	u32 cpuFreq, gpuFreq;
+	u32 cpu_freq, gpu_freq;
 
-	void SetCPUfreq(u32 freq); // ops per second
-	void SetGPUfreq(u32 freq); // frames per second
+	void set_cpu_freq(u32 freq); // ops per second
+	void set_gpu_freq(u32 freq); // frames per second
 	
-	void UpdateInput(u8 key, u8 state);
-	bool LoadROM(const wchar_t * name);
-	void Start();
-	void Reset();
-	void Loop();
-	void Shutdown();
+	void update_input(u8 key, u8 state);
+	bool load_rom(const wchar_t * name);
+	void start();
+	void reset();
+	void loop();
+	void shutdown();
 
-	MACHINE();
+	Machine();
 };

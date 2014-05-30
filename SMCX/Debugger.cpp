@@ -16,8 +16,8 @@
  */
 
 
-#include "Main.h"
-#include "Debugger.h"
+#include "main.h"
+#include "debugger.h"
 
 #include <cstdio>
 FILE * dbFile = NULL;

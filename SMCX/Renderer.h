@@ -18,18 +18,18 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-class RENDERER
+class Renderer
 {
 public:
-	virtual void SetPixel(u16 x, u16 y, u8 pix) = 0;
-	virtual void UpdatePalette(u32 *pal) = 0;
+	virtual void set_pixel(u16 x, u16 y, u8 pix) = 0;
+	virtual void set_palette(u32 *pal) = 0;
 
-	virtual void RenderClear(bool reset_palette) = 0;
-	virtual void RenderFrame() = 0;
+	virtual void render_clear(bool reset_palette) = 0;
+	virtual void render_frame() = 0;
 
-	virtual void Shutdown() = 0;
-	virtual void Restart(HWND hWnd) = 0;
-	virtual HRESULT Init(HWND hWnd) = 0;
+	virtual void shutdown() = 0;
+	virtual void restart(HWND hwnd) = 0;
+	virtual HRESULT init(HWND hwnd) = 0;
 };
 
 

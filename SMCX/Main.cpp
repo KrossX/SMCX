@@ -15,52 +15,51 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Main.h"
-#include "Machine.h"
-#include "Dialog.h"
-#include "Renderer.h"
-#include "Renderer_OGL.h"
+#include "main.h"
+#include "machine.h"
+#include "dialog.h"
+#include "renderer.h"
+#include "renderer_ogl.h"
 
-HINSTANCE hInst = NULL;
-MACHINE * machine = NULL;
-RENDERER * render = NULL;
+HINSTANCE hinst = NULL;
+
+Machine chip;
+Renderer_OGL render_ogl;
+Renderer* render = NULL;
 
 bool romloaded = false;
 bool stopped = true;
 
-int Shutdown()
+int shutdown()
 {
-	if(render) render->Shutdown();
-	if(machine) machine->Shutdown();
+	if(render) render->shutdown();
+	chip.shutdown();
 	return 0;
 }
 
-int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+int CALLBACK wWinMain(HINSTANCE hinstance, HINSTANCE hprevinstance, LPWSTR lpcmdline, int ncmdshow)
 {
-	HWND hWnd = NULL;
-	hInst = hInstance;
+	HWND hwnd = NULL;
+	hinst = hinstance;
 
 	SetProcessAffinityMask(GetCurrentProcess(), 1);
 
-	render = new RENDERER_OGL();
-	machine = new MACHINE();
-
-	if (!render ||
-		!machine ||
-		!InitDialog(hInst, nCmdShow, hWnd) ||
-		render->Init(hWnd) != S_OK)
+	render = &render_ogl;
+	
+	if (!InitDialog(hinstance, ncmdshow, hwnd) ||
+		render->init(hwnd) != S_OK)
 	{
-		return Shutdown();
+		return shutdown();
 	}
 
-	machine->Start();
+	chip.start();
 
-	if(machine->LoadROM(lpCmdLine))
+	if (chip.load_rom(lpcmdline))
 	{
 		romloaded = true;
 		stopped = false;
-		MenuRunSet(hWnd, true);
-		machine->Reset();
+		MenuRunSet(hwnd, true);
+		chip.reset();
 	}
 
 	MSG msg;
@@ -77,12 +76,12 @@ int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		}
 
 		if(romloaded && !stopped)
-			machine->Loop();
+			chip.loop();
 
 		Sleep(0);
 	}
 
-	return Shutdown();
+	return shutdown();
 }
 
 

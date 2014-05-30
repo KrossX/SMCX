@@ -15,48 +15,48 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Main.h"
-#include "Machine.h"
-#include "Renderer.h"
+#include "main.h"
+#include "machine.h"
+#include "renderer.h"
 
-extern RENDERER *render;
+extern Renderer *render;
 
-void MACHINE::SetPixel(u16 x, u16 y, u8 pix)
+void Machine::set_pixel(u16 x, u16 y, u8 pix)
 {
 	if(Mode_Mega)
-		render->SetPixel(x, y, pix);
+		render->set_pixel(x, y, pix);
 	else
 	{
 		for(u8 i = 0; i < ScaleX; i++)
 		for(u8 j = 0; j < ScaleY; j++)
 		{
 			Display[x+i][y+j] = pix;
-			render->SetPixel(x+i, y+j, pix);
+			render->set_pixel(x+i, y+j, pix);
 		}
 	}
 }
 
-void MACHINE::RenderSprite()
+void Machine::render_sprite()
 {
-	bool msmooth = Mode_Mega && Mega_Smooth;
+	bool msmooth = Mode_Mega && mega_smooth;
 
 	if(!msmooth)
-		render->RenderFrame();
+		render->render_frame();
 }
 
-void MACHINE::RenderClear()
+void Machine::render_clear()
 {
-	bool msmooth = Mode_Mega && Mega_Smooth;
+	bool msmooth = Mode_Mega && mega_smooth;
 
 	if(msmooth)
-		render->RenderFrame();
+		render->render_frame();
 
-	render->RenderClear(!Mode_Mega);
+	render->render_clear(!Mode_Mega);
 }
 
-void MACHINE::LoadPalette()
+void Machine::load_palette()
 {
 	//ARGB to d3d BGRA
 
-	render->UpdatePalette(Palette);
+	render->set_palette(Palette);
 }

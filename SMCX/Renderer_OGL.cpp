@@ -1,38 +1,38 @@
-#include "Main.h"
-#include "Renderer.h"
-#include "Renderer_OGL.h"
+#include "main.h"
+#include "renderer.h"
+#include "renderer_ogl.h"
 
-void RENDERER_OGL::SetPixel(u16 x, u16 y, u8 pix)
+void Renderer_OGL::set_pixel(u16 x, u16 y, u8 pix)
 {
 
 }
 
-void RENDERER_OGL::UpdatePalette(u32 *pal)
+void Renderer_OGL::set_palette(u32 *pal)
 {
 
 }
 
-void RENDERER_OGL::RenderClear(bool reset_palette)
+void Renderer_OGL::render_clear(bool reset_palette)
 {
 
 }
 
-void RENDERER_OGL::RenderFrame()
+void Renderer_OGL::render_frame()
 {
 
 }
 
-void RENDERER_OGL::Shutdown()
+void Renderer_OGL::shutdown()
 {
 
 }
 
-void RENDERER_OGL::Restart(HWND hWnd)
+void Renderer_OGL::restart(HWND hWnd)
 {
 
 }
 
-HRESULT RENDERER_OGL::Init(HWND hWnd)
+HRESULT Renderer_OGL::init(HWND hWnd)
 {
 	return 0;
 }

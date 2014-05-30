@@ -16,11 +16,11 @@
  */
 
 
-#include "Main.h"
-#include "Dialog.h"
+#include "main.h"
+#include "dialog.h"
 #include "resource.h"
-#include "Machine.h"
-#include "Renderer.h"
+#include "machine.h"
+#include "renderer.h"
 
 #include <Uxtheme.h>
 #include <CommCtrl.h>
@@ -30,10 +30,10 @@
 wchar_t windowTitle[] = L"SuperMegaChip-X";
 wchar_t windowClass[] = L"SUPERMEGACHIPX";
 
-extern MACHINE * machine;
-extern RENDERER * render;
+extern Machine chip;
+extern Renderer * render;
 
-extern HINSTANCE hInst;
+extern HINSTANCE hinst;
 extern bool romloaded;
 extern bool stopped;
 
@@ -55,17 +55,17 @@ INT_PTR CALLBACK ConfigProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 			SendMessage(GetDlgItem(hWnd, IDC_CPU_SLIDER), TBM_SETRANGE, TRUE, MAKELONG(5, 301));
 			SendMessage(GetDlgItem(hWnd, IDC_GPU_SLIDER), TBM_SETRANGE, TRUE, MAKELONG(5, 61));
 
-			s32 cpuvalue = (s32)sqrt(machine->cpuFreq * 1.0);
+			s32 cpuvalue = (s32)sqrt(chip.cpu_freq * 1.0);
 			cpuvalue = cpuvalue > 300 ? 0 : cpuvalue < 5 ? 0 : cpuvalue;
 
 			SendMessage(GetDlgItem(hWnd, IDC_CPU_SLIDER), TBM_SETPOS, TRUE, cpuvalue);
-			SendMessage(GetDlgItem(hWnd, IDC_GPU_SLIDER), TBM_SETPOS, TRUE, machine->gpuFreq);
+			SendMessage(GetDlgItem(hWnd, IDC_GPU_SLIDER), TBM_SETPOS, TRUE, chip.gpu_freq);
 
 			SendMessage(hWnd, WM_HSCROLL, 0, (LPARAM)GetDlgItem(hWnd, IDC_CPU_SLIDER));
 			SendMessage(hWnd, WM_HSCROLL, 0, (LPARAM)GetDlgItem(hWnd, IDC_GPU_SLIDER));
 
-			CheckDlgButton(hWnd, IDC_MEGASMOOTH, machine->Mega_Smooth ? BST_CHECKED : BST_UNCHECKED);
-			CheckDlgButton(hWnd, IDC_VSYNC, machine->vsync ? BST_CHECKED : BST_UNCHECKED);
+			CheckDlgButton(hWnd, IDC_MEGASMOOTH, chip.mega_smooth ? BST_CHECKED : BST_UNCHECKED);
+			CheckDlgButton(hWnd, IDC_VSYNC, chip.vsync ? BST_CHECKED : BST_UNCHECKED);
 
 			ShowWindow(hWnd, SW_SHOW);
 		}
@@ -95,7 +95,7 @@ INT_PTR CALLBACK ConfigProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 			
 				SetDlgItemText(hWnd, IDC_CPU_VALUE, text);
 
-				machine->SetCPUfreq(value);
+				chip.set_cpu_freq(value);
 			}
 			else  if((HWND)lParam == GetDlgItem(hWnd, IDC_GPU_SLIDER))
 			{
@@ -107,7 +107,7 @@ INT_PTR CALLBACK ConfigProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 				swprintf(text, value < 10 ? L"MAX" : L"%d", value);
 				SetDlgItemText(hWnd, IDC_GPU_VALUE, text);
 
-				machine->SetGPUfreq(value);
+				chip.set_gpu_freq(value);
 			}
 		} break;
 
@@ -116,11 +116,11 @@ INT_PTR CALLBACK ConfigProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 			switch(LOWORD(wParam))
 			{
 			case IDC_MEGASMOOTH:
-				machine->Mega_Smooth = IsDlgButtonChecked(hWnd, IDC_MEGASMOOTH) == BST_CHECKED? true : false;
+				chip.mega_smooth = IsDlgButtonChecked(hWnd, IDC_MEGASMOOTH) == BST_CHECKED? true : false;
 				break;
 
 			case IDC_VSYNC:
-				machine->vsync = IsDlgButtonChecked(hWnd, IDC_VSYNC) == BST_CHECKED? 1 : 0;
+				chip.vsync = IsDlgButtonChecked(hWnd, IDC_VSYNC) == BST_CHECKED? 1 : 0;
 				break;
 			}
 		}
@@ -142,7 +142,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 	case WM_KEYUP:
-		machine->UpdateInput(wParam & 0xFF, 0);
+		chip.update_input(wParam & 0xFF, 0);
 		break;
 
 	case WM_KEYDOWN:
@@ -177,7 +177,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 
 		default:
-			machine->UpdateInput(wParam & 0xFF, 1);
+			chip.update_input(wParam & 0xFF, 1);
 		}
 		break;
 
@@ -187,12 +187,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			wchar_t filename[MAX_PATH] = {0};
 
 			if(DragQueryFile(hDrop, 0, filename, MAX_PATH) &&
-				machine->LoadROM(filename))
+				chip.load_rom(filename))
 			{
 				MenuRunSet(hWnd, true);
 				romloaded = true;
 				stopped = false;
-				machine->Reset();
+				chip.reset();
 			}
 			DragFinish(hDrop);
 		}
@@ -210,11 +210,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				break;
 
 			case ID_RUN_RESET:
-				machine->Reset();
+				chip.reset();
 				break;
 
 			case ID_RUN_CONFIG:
-				hConfig = CreateDialog(hInst, MAKEINTRESOURCE(IDD_CONFIG), hWnd, ConfigProc);
+				hConfig = CreateDialog(hinst, MAKEINTRESOURCE(IDD_CONFIG), hWnd, ConfigProc);
 				break;
 
 			case ID_FILE_OPENROM:
@@ -227,19 +227,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 					opendialog.lStructSize = sizeof(opendialog);
 					opendialog.hwndOwner = hWnd;
-					opendialog.hInstance = hInst;
+					opendialog.hInstance = hinst;
 					opendialog.lpstrFile = filename;
 					opendialog.nMaxFile = MAX_PATH;
 					opendialog.lpstrInitialDir = directory;
 					opendialog.lpstrTitle = L"Open ROM";
 					opendialog.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
-					if(GetOpenFileName(&opendialog) && machine->LoadROM(filename))
+					if(GetOpenFileName(&opendialog) && chip.load_rom(filename))
 					{
 						MenuRunSet(hWnd, true);
 						romloaded = true;
 						stopped = false;
-						machine->Reset();
+						chip.reset();
 					}
 				}
 				break;
@@ -261,7 +261,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_SIZE:
-		render->Restart(hWnd);
+		render->restart(hWnd);
 		break;
 
 	case WM_CLOSE:

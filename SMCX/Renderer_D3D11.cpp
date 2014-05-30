@@ -15,7 +15,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Main.h"
+#include "main.h"
 
 #ifdef _USED3D11
 #include <cstdio>

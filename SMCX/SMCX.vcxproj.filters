@@ -15,63 +15,63 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Machine.cpp">
+    <ClCompile Include="machine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Machine_FileIO.cpp">
+    <ClCompile Include="machine_fileio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Machine_Render.cpp">
+    <ClCompile Include="machine_render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Machine_Input.cpp">
+    <ClCompile Include="machine_input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog_Main.cpp">
+    <ClCompile Include="dialog_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Machine_Instructions.cpp">
+    <ClCompile Include="machine_instructions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debugger.cpp">
+    <ClCompile Include="debugger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer_D3D11.cpp">
+    <ClCompile Include="renderer_d3d11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer_OGL.cpp">
+    <ClCompile Include="renderer_ogl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h">
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Machine.h">
+    <ClInclude Include="machine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dialog.h">
+    <ClInclude Include="dialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Machine_Instructions.h">
+    <ClInclude Include="machine_instructions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Debugger.h">
+    <ClInclude Include="debugger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer_D3D11.h">
+    <ClInclude Include="renderer_d3d11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer_OGL.h">
+    <ClInclude Include="renderer_ogl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

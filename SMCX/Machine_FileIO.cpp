@@ -16,8 +16,8 @@
  */
 
 
-#include "Main.h"
-#include "Machine.h"
+#include "main.h"
+#include "machine.h"
 #include <fstream>
 
 u8 Font[] = {0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
@@ -56,7 +56,7 @@ u16 Font10[] =
 			 0x80F0, 0x8080, 0x80F0, 0x8080, 0x0080};// F
 
 
-bool MACHINE::LoadROM(const wchar_t * name)
+bool Machine::load_rom(const wchar_t * name)
 {
 	memset(Memory, 0, sizeof(Memory));
 	memcpy(Memory, Font, sizeof(Font));

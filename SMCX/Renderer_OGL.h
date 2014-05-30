@@ -1,18 +1,18 @@
 #ifndef RENDERER_OGL_H
 #define RENDERER_OGL_H
 
-class RENDERER_OGL: public RENDERER
+class Renderer_OGL: public Renderer
 {
 public:
-	void SetPixel(u16 x, u16 y, u8 pix);
-	void UpdatePalette(u32 *pal);
+	void set_pixel(u16 x, u16 y, u8 pix);
+	void set_palette(u32 *pal);
 
-	void RenderClear(bool reset_palette);
-	void RenderFrame();
+	void render_clear(bool reset_palette);
+	void render_frame();
 
-	void Shutdown();
-	void Restart(HWND hWnd);
-	HRESULT Init(HWND hWnd);
+	void shutdown();
+	void restart(HWND hwnd);
+	HRESULT init(HWND hwnd);
 };
 
 

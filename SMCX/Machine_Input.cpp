@@ -16,12 +16,12 @@
  */
 
 
-#include "Main.h"
-#include "Machine.h"
+#include "main.h"
+#include "machine.h"
 
 u8 Keyboard[256] = {0};
 
-void MACHINE::UpdateInput(u8 key, u8 state)
+void Machine::update_input(u8 key, u8 state)
 {
 	//Sleep(1);
 
